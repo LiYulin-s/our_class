@@ -46,6 +46,14 @@
     <script src='/js/ningxia.js'></script>
     <script src='/js/xinjiang.js'></script>
     <script>
+        //定义一个函数判断是手机端还是pc端
+        function isMobile() {
+            if (window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
+                return true; // 移动端
+            } else {
+                return false; // PC端
+            }
+        }
         const provincePoems = {
             '湖南': "醉后不知天在水，满船清梦压星河。",
             '湖北': "山随平野尽，江入大荒流。",
@@ -218,7 +226,7 @@
         // 初始化图表
         let map = new Highcharts.Map('map', {
             chart: {
-                backgroundColor: '#f5f5f5', 
+                backgroundColor: '#f5f5f5',
                 events: {
                     drilldown: function (e) {
                         let name = e.point.name;
@@ -255,7 +263,7 @@
                 style: {
                     'color': '#dddddd',
                     'cursor': 'default',
-                    'fontSize': '18px',
+                    'fontSize': (isMobile() ? '25px' : '18px'),
                     'pointerEvents': 'none',
                     'whiteSpace': 'nowrap'
                 },
