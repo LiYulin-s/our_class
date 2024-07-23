@@ -46,6 +46,43 @@
     <script src='/js/ningxia.js'></script>
     <script src='/js/xinjiang.js'></script>
     <script>
+        const provincePoems = {
+            '湖南': "醉后不知天在水，满船清梦压星河。",
+            '湖北': "山随平野尽，江入大荒流。",
+            '河南': "白玉谁家郎，回车渡天津。看花东陌上，惊动洛阳人。",
+            '山东': "会当凌绝顶，一览众山小。",
+            '江苏': "月落乌啼霜满天，江枫渔火对愁眠。姑苏城外寒山寺，夜半钟声到客船。",
+            '浙江': "东南形胜，三吴都会，钱塘自古繁华。",
+            '上海': "落日西风见沪城，瓶山终古峙峥嵘。",
+            '安徽': "五岳归来不看山，黄山归来不看岳。",
+            '江西': "物华天宝，龙光射牛斗之墟；人杰地灵，徐孺下陈蕃之榻。",
+            '福建': "朱楼四面钩疏箔，卧看千山急雨来。",
+            '北京': "前不见古人，后不见来者。念天地之悠悠，独怆然而涕下！",
+            '天津': "津门极望气蒙蒙，泛地浮天海势东。",
+            '河北': "日月之行，若出其中；星汉灿烂，若出其里。",
+            '山西': "君不见，黄河之水天上来，奔流到海不复回。",
+            '内蒙古': "天苍苍，野茫茫，风吹草低见牛羊。",
+            '陕西': "九天阊阖开宫殿，万国衣冠拜冕旒。",
+            '甘肃': "黄河远上白云间，一片孤城万仞山。羌笛何须怨杨柳，春风不度玉门关。",
+            '青海': "青海长云暗雪山，孤城遥望玉门关。黄沙百战穿金甲，不破楼兰终不还。",
+            '宁夏': "大漠孤烟直，长河落日圆。",
+            '重庆': "两岸猿声啼不住，轻舟已过万重山。",
+            '四川': "连峰去天不盈尺，枯松倒挂倚绝壁。飞湍瀑流争喧豗，砯崖转石万壑雷。",
+            '云南': "天气常如二三月，花枝不断四时春。",
+            '贵州': "旧说天下山，半在黔中青。又闻天下泉，半落黔中鸣。",
+            '西藏': "半岩晦云雪，高顶澄烟霞。朝昏对宾馆，隐映如仙家。",
+            '新疆': "明月出天山，苍茫云海间。",
+            '黑龙江': "东去大江水，高源何处来。混同天一色，长白雪千堆。",
+            '吉林': "长白雄东北，嵯峨俯塞州。",
+            '辽宁': "相思不相见，托梦辽城东。",
+            '广东': "日啖荔枝三百颗，不辞长作岭南人。",
+            '广西': "桂林山水甲天下，玉碧罗青意可参。",
+            '海南': "海上去应远，蛮家云岛孤。竹船来桂浦，山市买鱼须。",
+            '香港': "方丈三神地，诸侯百里封。居然成重镇，高垒矗狼烽。",
+            '澳门': "不觉如丝戏海龙，大鱼春涨吐芙蓉。千金一片浑间事，愿得为云护九重。",
+            '台湾': "田横尚有三千容，茹苦间关不忍离。"
+        };
+
         let students = [
             { name: '陈锦涵', city: '沈阳', province: '辽宁', school: '中国刑事警察学院' },
             { name: '沙圣为', city: '南京', province: '江苏', school: '南京信息工程大学' },
@@ -89,7 +126,10 @@
             { name: '许佳淑', city: '烟台', province: '山东', school: '滨州医学院' },
             { name: '田天', city: '威海', province: '山东', school: '山东大学（威海）' },
             { name: '王宏哲', city: '哈尔滨', province: '黑龙江', school: '哈尔滨工程大学' },
-            { name: '马睿', city: '济南', province: '山东', school: '山东大学' }
+            { name: '马睿', city: '济南', province: '山东', school: '山东大学' },
+            { name: '张桢溥', city: '青岛', province: '山东', school: '中国海洋大学' },
+            { name: '杜杨淇', city: '西安', province: '陕西', school: '西安电子科技大学' },
+            { name: '马凯', city: '青岛', province: '山东', school: '青岛大学' }
         ];
 
         let data = Highcharts.geojson(Highcharts.maps['cn/china']);
@@ -176,15 +216,16 @@
         // 初始化图表
         let map = new Highcharts.Map('map', {
             chart: {
+                backgroundColor: '#f5f5f5', 
                 events: {
                     drilldown: function (e) {
                         let name = e.point.name;
-                        this.setTitle(null, { text: name });
+                        this.setTitle(null, { text: name + "<br><i>“" + provincePoems[name] });
                     },
                     drillup: function () {
                         data = Highcharts.maps['cn/china'];
                         this.setTitle(null, {
-                            text: '中国'
+                            text: '中国<br>*另有梁浩同学在印第斯安纳州，普渡大学(Purdue University West Lafayette)就读'
                         });
                     }
                 }
@@ -192,15 +233,15 @@
 
             title: {
                 text: '神奇五班在哪里',
-                style: { "color": "#333333", "fontSize": "24px" }
+                style: { "font-family": "serif", "color": "#333333", "fontSize": "24px", "fontWeight": "bold" }
             },
 
             subtitle: {
-                text: '中国',
+                text: '中国<br>*另有梁浩同学在印第斯安纳州，普渡大学(Purdue University West Lafayette)就读',
                 floating: true,
                 y: 50,
                 style: {
-                    fontSize: '16px'
+                    fontSize: '17px'
                 }
             },
 
@@ -227,11 +268,7 @@
                 maxColor: '#006cee',
                 stops: [
                     [0, '#ffffff'],
-                    [0.02, '#a4d9ee'],
-                    [0.04, '#7ebaee'],
-                    [0.1, '#357fee'],
-                    [0.5, '#0c70ee'],
-                    [1, '#006cee']
+                    [1, '#1453ad']
                 ]
             },
 
