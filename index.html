@@ -1,176 +1,158 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='UTF-8'>
-    <title>神奇十班在哪里</title>
+    <title>神奇五班在哪里</title>
 </head>
+
 <body style='margin: 0'>
-<div id='map' style='width:100vw;height: 100vh;'></div>
-<link rel="stylesheet" type="text/css" href="/css/index.css">
-<script src='/js/highmaps.js'></script>
-<script src='/js/drilldown.js'></script>
-<script src='/js/nunjucks.min.js'></script>
+    <div id='map' style='width:100vw;height: 100vh;'></div>
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <script src='/js/highmaps.js'></script>
+    <script src='/js/drilldown.js'></script>
+    <script src='/js/nunjucks.min.js'></script>
 
-<script src='/js/china.js'></script>
-<script src='/js/zhejiang.js'></script>
-<script src='/js/beijing.js'></script>
-<script src='/js/jiangsu.js'></script>
-<script src='/js/neimenggu.js'></script>
-<script src='/js/guangdong.js'></script>
-<script src='/js/tianjin.js'></script>
-<script src='/js/hebei.js'></script>
-<script src='/js/shanxi.js'></script>
-<script src='/js/liaoning.js'></script>
-<script src='/js/jilin.js'></script>
-<script src='/js/heilongjiang.js'></script>
-<script src='/js/shanghai.js'></script>
-<script src='/js/anhui.js'></script>
-<script src='/js/fujian.js'></script>
-<script src='/js/jiangxi.js'></script>
-<script src='/js/shandong.js'></script>
-<script src='/js/henan.js'></script>
-<script src='/js/hubei.js'></script>
-<script src='/js/hunan.js'></script>
-<script src='/js/guangxi.js'></script>
-<script src='/js/hainan.js'></script>
-<script src='/js/chongqing.js'></script>
-<script src='/js/sichuan.js'></script>
-<script src='/js/guizhou.js'></script>
-<script src='/js/yunnan.js'></script>
-<script src='/js/xizang.js'></script>
-<script src='/js/shanxi2.js'></script>
-<script src='/js/gansu.js'></script>
-<script src='/js/qinghai.js'></script>
-<script src='/js/ningxia.js'></script>
-<script src='/js/xinjiang.js'></script>
-<script>
-    let students = [
-        {name: '王宁', city: '杭州', province: '浙江', school: '浙江警察学院'},
-        {name: '苏杰', city: '杭州', province: '浙江', school: '浙江警察学院'},
-        {name: '王煜民', city: '哈尔滨', province: '黑龙江', school: '黑龙江中医药大学'},
-        {name: '卢乙源', city: '温州', province: '浙江', school: '温州医科大学'},
-        {name: '叶徐昇', city: '杭州', province: '浙江', school: '杭州师范大学'},
-        {name: '徐樱姿', city: '杭州', province: '浙江', school: '杭州师范大学'},
-        {name: '江川', city: '深圳', province: '广东', school: '南方科技大学'},
-        {name: '孙佳兰', city: '济南', province: '山东', school: '山东中医药大学'},
-        {name: '吴俊威', city: '海淀区', province: '北京', school: '北京师范大学'},
-        {name: '邱佳杰', city: '太原', province: '山西', school: '中北大学'},
-        {name: '张铭慧', city: '杭州', province: '浙江', school: '杭州电子科技大学'},
-        {name: '余晨', city: '杭州', province: '浙江', school: '杭州电子科技大学信息工程学院'},
-        // {name: '孙雯悦', city: '杭州', province: '浙江', school: '『本人不愿透露』大学'},
-        {name: '汪松波', city: '南京', province: '江苏', school: '南京大学金陵学院'},
-        {name: '张煜鑫', city: '乌鲁木齐', province: '新疆', school: '新疆大学'},
-        {name: '林淳悦', city: '晋中', province: '山西', school: '太原理工大学'},
-        {name: '金林晖', city: '武汉', province: '湖北', school: '武汉纺织大学'},
-        {name: '赵坚胜', city: '合肥', province: '安徽', school: '合肥工业大学'},
-        {name: '聂凌志', city: '宁波', province: '浙江', school: '宁波工程学院'},
-        {name: '徐伊健', city: '厦门', province: '福建', school: '华侨大学厦门校区'},
-        {name: '徐佳培', city: '杭州', province: '浙江', school: '中国美术学院'},
-        {name: '梁愉', city: '杭州', province: '浙江', school: '中国计量大学'},
-        {name: '洪健栩', city: '杭州', province: '浙江', school: '中国计量大学现代科技学院'},
-        {name: '郑鏏涵', city: '温州', province: '浙江', school: '温州肯恩大学'},
-        {name: '金嘉辉', city: '杭州', province: '浙江', school: '浙江树人大学'},
-        {name: '王轶楠', city: '杭州', province: '浙江', school: '浙江外国语学院'},
-        {name: '王炫迪', city: '温州', province: '浙江', school: '温州肯恩大学'},
-        {name: '任恬娴', city: '台州', province: '浙江', school: '台州学院'},
-        {name: '李昕烨', city: '洛阳', province: '河南', school: '洛阳理工学院'},
-        {name: '杨丹丹', city: '厦门', province: '福建', school: '厦门大学嘉庚学院'},
-        {name: '应熹晗', city: '杭州', province: '浙江', school: '浙江中医药大学'},
-        {name: '陈玲珑', city: '杭州', province: '浙江', school: '浙江中医药大学'},
-        {name: '宋宇夏', city: '温州', province: '浙江', school: '温州肯恩大学'},
-        {name: '陈志豪', city: '宁波', province: '浙江', school: '宁波工程学院'},
-        {name: '邵一凡', city: '杭州', province: '浙江', school: '浙江工业大学'},
-        {name: '郑霖祺', city: '杭州', province: '浙江', school: '浙江工业大学'},
-        {name: '罗意', city: '杭州', province: '浙江', school: '浙江工业大学'},
-        {name: '金倩倩', city: '杭州', province: '浙江', school: '浙江科技学院'},
-        {name: '周书臣', city: '宁波', province: '浙江', school: '宁波大学科学技术学院'},
-        {name: '郑茹尹', city: '杭州', province: '浙江', school: '浙江工商大学'},
-        // {name: '官钇含', city: '绍兴', province: '浙江', school: '绍兴文理学院元培学院'},
-        {name: '俞佳敏', city: '奉贤区', province: '上海', school: '上海商学院'},
-        {name: '徐龙', city: '东丽区', province: '天津', school: '中国民航大学'},
-        {name: '郭雨欣', city: '温州', province: '浙江', school: '温州大学'},
-        {name: '涂恒康', city: '兰州', province: '甘肃', school: '兰州财经大学'},
-        {name: '卢叶倪萍', city: '金华', province: '浙江', school: '浙江师范大学'},
-        {name: '叶莹超', city: '金华', province: '浙江', school: '浙江师范大学'},
-        {name: '陶文轩', city: '海口', province: '海南', school: '琼台师范学院'},
-        {name: '黄可悦', city: '金华', province: '浙江', school: '浙江师范大学'},
-        {name: '傅可悦', city: '金华', province: '浙江', school: '浙江师范大学行知学院'},
-        {name: '黄佳慧', city: '杭州', province: '浙江', school: '浙江大学'},
-        {name: '曹怡宁', city: '杭州', province: '浙江', school: '浙江大学'},
-        {name: '王相涛', city: '杭州', province: '浙江', school: '浙江大学城市学院'},
-        {name: '陈泱含', city: '杭州', province: '浙江', school: '浙江大学城市学院'},
-        {name: '陈思翰', city: '杭州', province: '浙江', school: '浙江大学城市学院'},
-        {name: '蔡杭烜', city: '杭州', province: '浙江', school: '浙江农林大学'},
-        {name: '吕泠熠', city: '杭州', province: '浙江', school: '浙江农林大学'},
-        {name: '梁家懿', city: '杭州', province: '浙江', school: '浙江农林大学'},
-        {name: '翟如月', city: '杭州', province: '浙江', school: '浙江农林大学'},
+    <script src='/js/china.js'></script>
+    <script src='/js/zhejiang.js'></script>
+    <script src='/js/beijing.js'></script>
+    <script src='/js/jiangsu.js'></script>
+    <script src='/js/neimenggu.js'></script>
+    <script src='/js/guangdong.js'></script>
+    <script src='/js/tianjin.js'></script>
+    <script src='/js/hebei.js'></script>
+    <script src='/js/shanxi.js'></script>
+    <script src='/js/liaoning.js'></script>
+    <script src='/js/jilin.js'></script>
+    <script src='/js/heilongjiang.js'></script>
+    <script src='/js/shanghai.js'></script>
+    <script src='/js/anhui.js'></script>
+    <script src='/js/fujian.js'></script>
+    <script src='/js/jiangxi.js'></script>
+    <script src='/js/shandong.js'></script>
+    <script src='/js/henan.js'></script>
+    <script src='/js/hubei.js'></script>
+    <script src='/js/hunan.js'></script>
+    <script src='/js/guangxi.js'></script>
+    <script src='/js/hainan.js'></script>
+    <script src='/js/chongqing.js'></script>
+    <script src='/js/sichuan.js'></script>
+    <script src='/js/guizhou.js'></script>
+    <script src='/js/yunnan.js'></script>
+    <script src='/js/xizang.js'></script>
+    <script src='/js/shaanxi.js'></script>
+    <script src='/js/gansu.js'></script>
+    <script src='/js/qinghai.js'></script>
+    <script src='/js/ningxia.js'></script>
+    <script src='/js/xinjiang.js'></script>
+    <script>
+        let students = [
+            { name: '陈锦涵', city: '沈阳', province: '辽宁', school: '中国刑事警察学院' },
+            { name: '沙圣为', city: '南京', province: '江苏', school: '南京信息工程大学' },
+            { name: '马畅', city: '长春', province: '吉林', school: '吉林大学' },
+            { name: '王盛', city: '青岛', province: '山东', school: '中国海洋大学' },
+            { name: '朱朝晖', city: '威海', province: '山东', school: '山东大学（威海）' },
+            { name: '李昱霖', city: '西安', province: '陕西', school: '西北工业大学' },
+            { name: '王振一', city: '长沙', province: '湖南', school: '中南大学' },
+            { name: '潘晨阳', city: '长春', province: '吉林', school: '吉林大学' },
+            { name: '张天恩', city: '西青区', province: '天津', school: '天津工业大学' },
+            { name: '张展', city: '济南', province: '山东', school: '山东大学' },
+            { name: '李泽宇', city: '海淀区', province: '北京', school: '北京科技大学' },
+            { name: '张洋铭', city: '大连', province: '辽宁', school: '大连理工大学' },
+            { name: '汪圣康', city: '大连', province: '辽宁', school: '大连理工大学' },
+            { name: '康晨', city: '西安', province: '陕西', school: '长安大学' },
+            { name: '魏驰', city: '济南', province: '山东', school: '山东大学' },
+            { name: '肖冠霖', city: '济南', province: '山东', school: '山东第一医科大学' },
+            { name: '郑皓文', city: '泰安', province: '山东', school: '山东农业大学' },
+            { name: '张子轩', city: '哈尔滨', province: '黑龙江', school: '哈尔滨工程大学' },
+            { name: '张晏宁', city: '北碚区', province: '重庆', school: '西南大学' },
+            { name: '仝家川', city: '济南', province: '山东', school: '山东大学' },
+            { name: '刘天宇', city: '济南', province: '山东', school: '山东大学' },
+            { name: '李佳凝', city: '青岛', province: '山东', school: '中国海洋大学' },
+            { name: '李志全', city: '长春', province: '吉林', school: '吉林大学' },
+            { name: '宗美琦', city: '合肥', province: '安徽', school: '合肥工业大学' },
+            { name: '王国淇', city: '青岛', province: '山东', school: '山东大学' },
+            { name: '陈思远', city: '合肥', province: '安徽', school: '合肥工业大学' },
+            { name: '宋子墨', city: '济南', province: '山东', school: '山东大学' },
+            { name: '王梓群', city: '济南', province: '山东', school: '山东财经大学' },
+            { name: '张家浩', city: '济南', province: '山东', school: '山东财经大学' },
+            { name: '孙艺鸣', city: '成都', province: '四川', school: '四川大学' },
+            { name: '刘家豪', city: '郑州', province: '河南', school: '战略支援部队信息工程大学' },
+            { name: '崔亚鹏', city: '成都', province: '四川', school: '成都理工大学' },
+            { name: '秦北辰', city: '哈尔滨', province: '黑龙江', school: '哈尔滨工程大学' },
+            { name: '孟祉含', city: '咸阳', province: '陕西', school: '西北农林科技大学' },
+            { name: '何宇航', city: '牡丹江', province: '黑龙江', school: '牡丹江医科大学' },
+            { name: '张华为', city: '大连', province: '辽宁', school: '大连理工大学' },
+            { name: '秦琳然', city: '南京', province: '江苏', school: '南京信息工程大学' },
+            { name: '吕浩然', city: '济南', province: '山东', school: '山东第一医科大学' },
+            { name: '林宗硕', city: '成都', province: '四川', school: '西南交通大学' },
+            { name: '许佳淑', city: '烟台', province: '山东', school: '滨州医学院' },
+            { name: '田天', city: '威海', province: '山东', school: '山东大学（威海）' },
+            { name: '王宏哲', city: '哈尔滨', province: '黑龙江', school: '哈尔滨工程大学' },
+            { name: '马睿', city: '济南', province: '山东', school: '山东大学' }
+        ];
 
-        {name: '蔡沁园', city: '台州', province: '浙江', school: '台州市书生中学'},
+        let data = Highcharts.geojson(Highcharts.maps['cn/china']);
 
-    ];
-
-    let data = Highcharts.geojson(Highcharts.maps['cn/china']);
-
-    let provinces = {};
-    Highcharts.each(data, function (d) {
-        provinces[d.name] = d;
-        d.drilldown = d.name;
-        d.value = 0;
-        d.cities = {};
-        d.people = [];
-    });
-
-    for (let s of students) {
-        provinces[s.province].value++;
-        provinces[s.province].people.push(s)
-    }
-
-    for (let p of Object.values(provinces)) {
-        let filename = p.properties.filename;
-        if (!Highcharts.maps[`cn/${filename}`]) {
-            continue
-        }
-        let subData = p.subData = Highcharts.geojson(Highcharts.maps[`cn/${filename}`]);
-        Highcharts.each(subData, function (city) {
-            p.cities[city.name] = city;
-            city.value = 0;
-            city.people = [];
+        let provinces = {};
+        Highcharts.each(data, function (d) {
+            provinces[d.name] = d;
+            d.drilldown = d.name;
+            d.value = 0;
+            d.cities = {};
+            d.people = [];
         });
+
         for (let s of students) {
-            if (p.cities[s.city] !== undefined) {
-                p.cities[s.city].value++;
-                p.cities[s.city].people.push(s);
-            }
+            provinces[s.province].value++;
+            provinces[s.province].people.push(s)
         }
-    }
 
-    function makeSeries() {
-        let series = [];
         for (let p of Object.values(provinces)) {
-            if (p.subData) {
-                series.push({
-                    id: p.name,
-                    name: p.name,
-                    data: p.subData,
-                    dataLabels: {
-                        enabled: true,
-                        format: '{point.name}'
-                    }
-                })
+            let filename = p.properties.filename;
+            if (!Highcharts.maps[`cn/${filename}`]) {
+                continue
+            }
+            let subData = p.subData = Highcharts.geojson(Highcharts.maps[`cn/${filename}`]);
+            Highcharts.each(subData, function (city) {
+                p.cities[city.name] = city;
+                city.value = 0;
+                city.people = [];
+            });
+            for (let s of students) {
+                if (p.cities[s.city] !== undefined) {
+                    p.cities[s.city].value++;
+                    p.cities[s.city].people.push(s);
+                }
             }
         }
-        return series;
-    }
 
-    function formatter() {
-        let template = `
+        function makeSeries() {
+            let series = [];
+            for (let p of Object.values(provinces)) {
+                if (p.subData) {
+                    series.push({
+                        id: p.name,
+                        name: p.name,
+                        data: p.subData,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}'
+                        }
+                    })
+                }
+            }
+            return series;
+        }
+
+        function formatter() {
+            let template = `
         <div class="tooltip">
             <div class="series">{{series}}</div>
             <div class="profile">
                 <div class="name">{{name}}:</div>
                 <div class="value">{{value}}人</div>
             </div>
-            {% if name !== '浙江' %}
             <div class="list">
                 {% for p in people %}
                 <div class="pinfo">
@@ -180,25 +162,24 @@
                 </div>
                 {% endfor %}
             </div>
-            {% endif %}
         </div>
         `;
 
-        return nunjucks.renderString(template, {
-            name: this.point.name,
-            series: this.series.name,
-            value: this.point.value,
-            people: this.point.people
-        });
-    }
+            return nunjucks.renderString(template, {
+                name: this.point.name,
+                series: this.series.name,
+                value: this.point.value,
+                people: this.point.people
+            });
+        }
 
-    // 初始化图表
-    let map = new Highcharts.Map('map', {
+        // 初始化图表
+        let map = new Highcharts.Map('map', {
             chart: {
                 events: {
                     drilldown: function (e) {
                         let name = e.point.name;
-                        this.setTitle(null, {text: name});
+                        this.setTitle(null, { text: name });
                     },
                     drillup: function () {
                         data = Highcharts.maps['cn/china'];
@@ -210,8 +191,8 @@
             },
 
             title: {
-                text: '神奇十班在哪里',
-                style: {"color": "#333333", "fontSize": "24px"}
+                text: '神奇五班在哪里',
+                style: { "color": "#333333", "fontSize": "24px" }
             },
 
             subtitle: {
@@ -240,7 +221,7 @@
 
             colorAxis: {
                 min: 0,
-                max: 50,
+                max: 20,
                 type: 'linear',
                 minColor: '#ffffff',
                 maxColor: '#006cee',
@@ -264,39 +245,39 @@
             }],
 
             drilldown:
-                {
-                    activeDataLabelStyle: {
-                        color: '#FFFFFF',
-                        textDecoration:
-                            'none',
-                        textShadow:
-                            '0 0 3px #000000'
-                    }
-                    ,
-                    drillUpButton: {
-                        relativeTo: 'spacingBox',
-                        position:
-                            {
-                                x: 0,
-                                y:
-                                    60
-                            }
-                    }
-                    ,
-                    series: makeSeries()
+            {
+                activeDataLabelStyle: {
+                    color: '#FFFFFF',
+                    textDecoration:
+                        'none',
+                    textShadow:
+                        '0 0 3px #000000'
                 }
+                ,
+                drillUpButton: {
+                    relativeTo: 'spacingBox',
+                    position:
+                    {
+                        x: 0,
+                        y:
+                            60
+                    }
+                }
+                ,
+                series: makeSeries()
+            }
             ,
 
             mapNavigation: {
                 enabled: true,
                 buttonOptions:
-                    {
-                        verticalAlign: 'bottom'
-                    }
+                {
+                    verticalAlign: 'bottom'
+                }
             }
         })
-    ;
-</script>
-
+            ;
+    </script>
 </body>
+
 </html>
