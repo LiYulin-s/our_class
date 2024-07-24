@@ -7,7 +7,7 @@
 </head>
 
 <body style='margin: 0'>
-    <div id='map' style='width:100vw;height: 100vh;'></div>
+    <div id='map' style='width:100vw;height: 95vh;'></div>
     <link rel="stylesheet" type="text/css" href="/css/index.css">
     <script src='/js/highmaps.js'></script>
     <script src='/js/drilldown.js'></script>
@@ -139,7 +139,14 @@
             { name: '杜杨淇', city: '西安', province: '陕西', school: '西安电子科技大学' },
             { name: '马凯', city: '青岛', province: '山东', school: '青岛大学' },
             { name: '窦子晴', city: '昆明', province: '云南', school: '昆明医科大学' },
-            { name: '齐小雅', city: '昆明', province: '云南', school: '云南大学' }
+            { name: '齐小雅', city: '昆明', province: '云南', school: '云南大学' },
+            { name: '陈阳', city: '聊城', province: '山东', school: '聊城大学' },
+            { name: '王艺榕', city: '济南', province: '山东', school: '山东第一医科大学' },
+            { name: '武宇哲', city: '哈尔滨', province: '黑龙江', school: '东北石油大学' },
+            { name: '樊祥凯', city: '济南', province: '山东', school: '山东师范大学' },
+            { name: '苏菡', city: '济南', province: '山东', school: '山东科技大学' },
+            { name: '李小禾', city: '济南', province: '山东', school: '山东理工大学' },
+            { name: '苏育甲', city: '武汉', province: '湖北', school: '中国地质大学' }
         ];
 
         let data = Highcharts.geojson(Highcharts.maps['cn/china']);
@@ -226,7 +233,7 @@
         // 初始化图表
         let map = new Highcharts.Map('map', {
             chart: {
-                backgroundColor: '#f5f5f5',
+                backgroundColor: 'azure',
                 events: {
                     drilldown: function (e) {
                         let name = e.point.name;
@@ -258,7 +265,7 @@
             tooltip: {
                 useHTML: true,
                 backgroundColor: '#357fee',
-                borderRadius: 5,
+                borderRadius: 10,
                 padding: 12,
                 style: {
                     'color': '#dddddd',
@@ -267,7 +274,10 @@
                     'pointerEvents': 'none',
                     'whiteSpace': 'nowrap'
                 },
-                formatter: formatter
+                formatter: formatter,
+                positioner: function () {
+                    return { x: 0, y: 100 };
+                }
             },
 
             colorAxis: {
@@ -326,5 +336,11 @@
             ;
     </script>
 </body>
+<div id="container" style="font-size: large; text-align: center; background-color:azure; height: 100%; width: 100%;">
+    <div style="color:crimson; font-size: x-large;">不要忘记我们的老师们：<br></div>
+    英语/班主任：沈秋华 数学：李红娟 语文：薛冬冬<br>
+    物理：任鸣龙 化学：朱路群 生物：郭龙学<br>
+
+</div>
 
 </html>
